@@ -1,9 +1,13 @@
 { 
-apiKey  :   "AIzaSyBPo3GfkMlgXd6Nmvzk2EMfnW4_x9PDne4"  , 
-authDomain :  "kamienica-woda-wr40.firebaseapp.com" , 
-projectId :  "kamienica-woda-wr40" , 
-storageBucket :  "kamienica-woda-wr40.firebasestorage.app" , 
-messagingSenderId  :   "672381024399"  , 
-identyfikator aplikacji  :   „1:672381024399:web:afd8aa83d30d6a13ca98fa”  , 
-MeasurementId  :   "G-EGG3FZEW4X" 
+apiKey: "AIzaSyBoIq8CSJklYGaFKu2PicY7AEy2dKIfiFU",
+
+  authDomain: "rozliczenie-wody-kamienica.firebaseapp.com",
+
+  projectId: "rozliczenie-wody-kamienica",
+
+  storageBucket: "rozliczenie-wody-kamienica.firebasestorage.app",
+
+  messagingSenderId: "565035490665",
+
+  appId: "1:565035490665:web:8b4a719bf06f72f6c7b1f8"
 }
