@@ -1,0 +1,257 @@
+{
+  "entities": {
+    "GlobalSettings": {
+      "title": "Global Settings",
+      "description": "Global configuration for the building management",
+      "type": "object",
+      "properties": {
+        "renovationFund": {
+          "type": "number",
+          "description": "Fixed monthly fee for the renovation fund per apartment"
+        },
+        "initialBalance": {
+          "type": "number",
+          "description": "Initial account balance"
+        },
+        "lastUpdated": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Timestamp of the last update"
+        }
+      },
+      "required": ["renovationFund", "initialBalance"]
+    },
+    "FinanceEntry": {
+      "title": "Finance Entry",
+      "description": "A financial transaction (income or expense)",
+      "type": "object",
+      "properties": {
+        "date": {
+          "type": "string",
+          "format": "date",
+          "description": "Date of the transaction"
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of the transaction"
+        },
+        "person": {
+          "type": "string",
+          "description": "Recipient (for expense) or Sender (for income)"
+        },
+        "description": {
+          "type": "string",
+          "description": "Description of the transaction"
+        },
+        "amount": {
+          "type": "number",
+          "description": "Amount of the transaction"
+        },
+        "type": {
+          "type": "string",
+          "enum": ["income", "expense"],
+          "description": "Type of the transaction"
+        }
+      },
+      "required": ["date", "name", "person", "description", "amount", "type"]
+    },
+    "Resident": {
+      "title": "Resident",
+      "description": "Information about a resident/apartment",
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Full name of the resident"
+        },
+        "apartmentNumber": {
+          "type": "string",
+          "description": "Apartment number"
+        },
+        "email": {
+          "type": "string",
+          "format": "email",
+          "description": "Email address for notifications"
+        },
+        "phone": {
+          "type": "string",
+          "description": "Phone number"
+        },
+        "meters": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": { "type": "string" },
+              "name": { "type": "string" },
+              "initialReading": { "type": "number" }
+            }
+          },
+          "description": "List of meters for this resident"
+        }
+      },
+      "required": ["name", "apartmentNumber", "meters"]
+    },
+    "BillingPeriod": {
+      "title": "Billing Period",
+      "description": "Monthly billing period details",
+      "type": "object",
+      "properties": {
+        "month": {
+          "type": "string",
+          "description": "Month in YYYY-MM format"
+        },
+        "mainMeterStart": {
+          "type": "number",
+          "description": "Main meter reading at start of period"
+        },
+        "mainMeterEnd": {
+          "type": "number",
+          "description": "Main meter reading at end of period"
+        },
+        "totalConsumption": {
+          "type": "number",
+          "description": "Total water consumption in m3"
+        },
+        "totalInvoiceAmount": {
+          "type": "number",
+          "description": "Total amount from the main invoice in PLN"
+        },
+        "pricePerM3": {
+          "type": "number",
+          "description": "Calculated price per 1 m3 of water"
+        },
+        "elecMeterStart": {
+          "type": "number",
+          "description": "Electricity meter reading at start of period"
+        },
+        "elecMeterEnd": {
+          "type": "number",
+          "description": "Electricity meter reading at end of period"
+        },
+        "elecTotalConsumption": {
+          "type": "number",
+          "description": "Total electricity consumption in kWh"
+        },
+        "elecTotalInvoiceAmount": {
+          "type": "number",
+          "description": "Total amount from the electricity invoice in PLN"
+        },
+        "elecPricePerKWh": {
+          "type": "number",
+          "description": "Calculated price per 1 kWh of electricity"
+        },
+        "renovationFundAtTime": {
+          "type": "number",
+          "description": "Renovation fund rate active during this period"
+        },
+        "status": {
+          "type": "string",
+          "enum": ["draft", "published"],
+          "description": "Status of the billing period"
+        },
+        "invoicePeriodStart": {
+          "type": "string",
+          "format": "date",
+          "description": "Start date of the invoice period"
+        },
+        "invoicePeriodEnd": {
+          "type": "string",
+          "format": "date",
+          "description": "End date of the invoice period"
+        }
+      },
+      "required": ["month", "mainMeterStart", "mainMeterEnd", "totalInvoiceAmount", "pricePerM3", "renovationFundAtTime"]
+    },
+    "Reading": {
+      "title": "Meter Reading",
+      "description": "Individual meter reading for a resident in a billing period",
+      "type": "object",
+      "properties": {
+        "billingPeriodId": {
+          "type": "string",
+          "description": "ID of the billing period"
+        },
+        "residentId": {
+          "type": "string",
+          "description": "ID of the resident"
+        },
+        "meterReadings": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "startReading": { "type": "number" },
+              "endReading": { "type": "number" },
+              "consumption": { "type": "number" }
+            }
+          }
+        },
+        "meterConsumption": {
+          "type": "number",
+          "description": "Sum of consumption from all meters"
+        },
+        "waterLossShare": {
+          "type": "number",
+          "description": "Share of water losses"
+        },
+        "waterLossCost": {
+          "type": "number",
+          "description": "Cost of water losses"
+        },
+        "totalConsumption": {
+          "type": "number",
+          "description": "Total consumption (meters + losses)"
+        },
+        "waterCost": {
+          "type": "number",
+          "description": "Calculated cost of water"
+        },
+        "elecCost": {
+          "type": "number",
+          "description": "Calculated cost of electricity"
+        },
+        "repairFund": {
+          "type": "number",
+          "description": "Renovation fund amount"
+        },
+        "totalToPay": {
+          "type": "number",
+          "description": "Total amount to pay (water + electricity + fund)"
+        },
+        "paidAmount": {
+          "type": "number",
+          "description": "Amount paid by the resident"
+        },
+        "paymentDate": {
+          "type": "string",
+          "format": "date",
+          "description": "Date of payment"
+        }
+      },
+      "required": ["billingPeriodId", "residentId", "meterReadings", "meterConsumption", "waterCost", "totalToPay"]
+    }
+  },
+  "firestore": {
+    "/settings/global": {
+      "schema": "GlobalSettings",
+      "description": "Global configuration"
+    },
+    "/residents/{residentId}": {
+      "schema": "Resident",
+      "description": "Resident collection"
+    },
+    "/billingPeriods/{periodId}": {
+      "schema": "BillingPeriod",
+      "description": "Billing periods collection"
+    },
+    "/readings/{readingId}": {
+      "schema": "Reading",
+      "description": "Individual readings collection"
+    },
+    "/finance/{entryId}": {
+      "schema": "FinanceEntry",
+      "description": "Financial transactions collection"
+    }
+  }
+}
