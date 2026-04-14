@@ -1,13 +1,8 @@
-{ 
-apiKey: "AIzaSyBoIq8CSJklYGaFKu2PicY7AEy2dKIfiFU",
-
-  authDomain: "rozliczenie-wody-kamienica.firebaseapp.com",
-
-  projectId: "rozliczenie-wody-kamienica",
-
-  storageBucket: "rozliczenie-wody-kamienica.firebasestorage.app",
-
-  messagingSenderId: "565035490665",
-
-  appId: "1:565035490665:web:8b4a719bf06f72f6c7b1f8"
+{
+"apiKey": "AIzaSyBoIq8CSJklYGaFKu2PicY7AEy2dKIfiFU",
+"authDomain": "rozliczenie-wody-kamienica.firebaseapp.com",
+"projectId": "rozliczenie-wody-kamienica",
+"storageBucket": "rozliczenie-wody-kamienica.firebasestorage.app",
+"messagingSenderId": "565035490665",
+"appId": "1:565035490665:web:8b4a719bf06f72f6c7b1f8"
 }
