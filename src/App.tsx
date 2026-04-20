@@ -2873,7 +2873,7 @@ function PeriodDetail({ periodId, residents, billingPeriods, globalSettings, onB
 
     const totalMetersCount = residents.reduce((sum, res) => sum + (res.meters?.length || 0), 0);
     // Ensure ubytki are not negative if data is incomplete or main meter is not yet entered
-    const totalUbytki = Math.max(0, (currentPeriod.totalConsumption || 0) - totalResidentsMeterConsumption);
+    const totalUbytki = (currentPeriod.totalConsumption || 0) - totalResidentsMeterConsumption;
     const ubytkiPerMeter = totalMetersCount > 0 ? totalUbytki / totalMetersCount : 0;
 
     const elecCostPerResident = residents.length > 0 ? currentPeriod.elecTotalInvoiceAmount / residents.length : 0;
@@ -3137,7 +3137,7 @@ function PeriodDetail({ periodId, residents, billingPeriods, globalSettings, onB
 
     const resMeterConsumption = reading?.meterConsumption ?? 0;
     const totalMetersCount = residents.reduce((sum, res) => sum + (res.meters?.length || 0), 0);
-    const ubytki = Math.max(0, (period.totalConsumption || 0) - totalResidentsMeterConsumption);
+    const ubytki = (period.totalConsumption || 0) - totalResidentsMeterConsumption;
     const ubytkiPerMeter = totalMetersCount > 0 ? ubytki / totalMetersCount : 0;
     const resMeterCount = resident.meters?.length || 0;
     const resWaterLossShare = ubytkiPerMeter * resMeterCount;
